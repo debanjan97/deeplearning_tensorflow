@@ -36,12 +36,13 @@ weights = {
 }
 
 bias = {
-    'bc1': tf.get_variable('B4000', shape = (32), initializer = tf.contrib.layers.xavier_initializer()),
-    'bc2': tf.get_variable('B4100', shape = (64), initializer = tf.contrib.layers.xavier_initializer()),
-    'bc3': tf.get_variable('B5100', shape = (128), initializer = tf.contrib.layers.xavier_initializer()),
-    'bd': tf.get_variable('B5300', shape = (128), initializer = tf.contrib.layers.xavier_initializer()),
-    'out': tf.get_variable('B5110', shape = (10), initializer = tf.contrib.layers.xavier_initializer()),
+    'bc1': tf.get_variable('B40000', shape = (32), initializer = tf.contrib.layers.variance_scaling_initializer()),
+    'bc2': tf.get_variable('B41000', shape = (64), initializer = tf.contrib.layers.variance_scaling_initializer()),
+    'bc3': tf.get_variable('B51000', shape = (128), initializer = tf.contrib.layers.variance_scaling_initializer()),
+    'bd': tf.get_variable('B530000', shape = (128), initializer = tf.contrib.layers.variance_scaling_initializer()),
+    'out': tf.get_variable('B51100', shape = (10), initializer = tf.contrib.layers.variance_scaling_initializer()),
 }
+
 
 def conv_net(x, weights, biases):
     conv1 = conv2d(x, weights['wc1'], bias['bc1'])
