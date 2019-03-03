@@ -28,11 +28,11 @@ def maxpool2d(x, k=2):
     return tf.nn.max_pool(x, ksize = [1, k, k, 1], strides = [1, k, k, 1], padding = 'SAME')
 
 weights = {
-    'wc1': tf.get_variable('W2000', shape = (3,3,1,32), initializer = tf.contrib.layers.xavier_initializer()),
-    'wc2': tf.get_variable('W2100', shape = (3,3,32,64), initializer = tf.contrib.layers.xavier_initializer()),
-    'wc3': tf.get_variable('W2200', shape = (3,3,64,128), initializer = tf.contrib.layers.xavier_initializer()),
-    'wd': tf.get_variable('W2300', shape = (4*4*128,128), initializer = tf.contrib.layers.xavier_initializer()),
-    'out': tf.get_variable('W2600', shape = (128, 10), initializer = tf.contrib.layers.xavier_initializer())
+    'wc1': tf.get_variable('W20000', shape = (3,3,1,32), initializer = tf.contrib.layers.variance_scaling_initializer()),
+    'wc2': tf.get_variable('W21000', shape = (3,3,32,64), initializer = tf.contrib.layers.variance_scaling_initializer()),
+    'wc3': tf.get_variable('W220000', shape = (3,3,64,128), initializer = tf.contrib.layers.variance_scaling_initializer()),
+    'wd': tf.get_variable('W23000', shape = (4*4*128,128), initializer = tf.contrib.layers.variance_scaling_initializer()),
+    'out': tf.get_variable('W26000', shape = (128, 10), initializer = tf.contrib.layers.variance_scaling_initializer())
 }
 
 bias = {
@@ -42,7 +42,6 @@ bias = {
     'bd': tf.get_variable('B530000', shape = (128), initializer = tf.contrib.layers.variance_scaling_initializer()),
     'out': tf.get_variable('B51100', shape = (10), initializer = tf.contrib.layers.variance_scaling_initializer()),
 }
-
 
 def conv_net(x, weights, biases):
     conv1 = conv2d(x, weights['wc1'], bias['bc1'])
